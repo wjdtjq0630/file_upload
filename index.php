@@ -1,7 +1,7 @@
 <?php
   include 'config.php';
 
-  $sql = "SELECT * FROM ftp";
+  $sql = "SELECT * FROM ftp ORDER BY DESC";
   $result = mysqli_query($conn, $sql);
  ?>
 <!DOCTYPE html>
