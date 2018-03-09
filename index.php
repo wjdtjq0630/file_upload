@@ -1,8 +1,5 @@
 <?php
   include 'config.php';
-
-  $sql = "SELECT * FROM ftp ORDER BY DESC";
-  $result = mysqli_query($conn, $sql);
  ?>
 <!DOCTYPE html>
 <html>
@@ -24,6 +21,8 @@
       </thead>
       <tbody>
         <?php
+          $sql = "SELECT * FROM ftp ORDER BY DESC";
+          if($result = mysqli_query($conn, $sql)){
           while($row = mysqli_fetch_array($result)){
             $id = $row['id'];
             $name = $row['name'];
@@ -35,6 +34,7 @@
             }
              echo '<tr><td>'.$id.'</td><td><a href="./download.php?num='.$id.'">'.$name.'</a></td><td>'.$time.'</td><td>'.$down.'</td><td><a href="./delete.php?num='.$id.'">DEL</a></td>';
           }
+        }
           mysqli_close($conn);
          ?>
       </tbody>
