@@ -21,7 +21,7 @@
       </thead>
       <tbody>
         <?php
-          $sql = "SELECT * FROM ftp ORDER BY DESC";
+          $sql = "SELECT * FROM ftp ORDER BY id DESC";
           if($result = mysqli_query($conn, $sql)){
           while($row = mysqli_fetch_array($result)){
             $id = $row['id'];
