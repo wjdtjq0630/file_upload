@@ -20,7 +20,7 @@
   $filedown = $row['down'];
   if(file_exists($dir.$filehash)){
     header("Content-Type: Application/octet-stream");
-    header("Content-Disposition: attachm;ent; filename=".$filename);
+    header("Content-Disposition: attachment; filename=".$filename);
     header("Content-Transfer-Encoding: binary");
     header("Content-Length: ".filesize($dir.$filehash));
 
