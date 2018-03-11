@@ -20,23 +20,24 @@
   $filedown = $row['down'];
   if(file_exists($dir.$filehash)){
     header("Content-Type: Application/octet-stream");
-    header("Content-Disposition: attachment; filename=".$filename);
-    header("Content-Transfer-Encoding: binary");
-    header("Content-Length: ".filesize($dir.$filehash));
+    header("Content-Disposition: attachment; filename=".$filename); //파일 이름 지정
+    header("Content-Transfer-Encoding: binary"); //파일 형식 지정
+    header("Content-Length: ".filesize($dir.$filehash)); //파일 크기(다운로드 남은 시간 측정 가능하게 )
 
     $fp = fopen($dir.$filehash, "rb");
     while(!feof($fp)){
       echo fread($fp, 1024);
     }
-    fclose($fp);
 
     if($row['down'] == ""){
-      $sql = "UPDATE ftp SET down='1' WHERE id='$id'";
+      $sql = "UPDATE ftp SET down='1' WHERE id='$num'";
       mysqli_query($conn, $sql);
     } else{
-      $sql = "UPDATE ftp SET down=(down+1) WHERE id='$id';";
+      $sql = "UPDATE ftp SET down=(down+1) WHERE id='$num';";
       mysqli_query($conn, $sql);
     }
+    echo "<script>location.href='./index.php';</script>";
+    fclose($fp);
     mysqli_close($conn);
   } else{
     echo "<script>alert('파일이 존재하지 않습니다.'); history.back();</script>";
