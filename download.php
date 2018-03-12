@@ -1,6 +1,5 @@
 <?php
   include 'config.php';
-  header("Content-type: text/html; charset=utf-8");
 
   if(!$num = $_GET['num']){
     echo '<script>alert("잘못된 접근입니다."); history.back();</script>';
@@ -18,6 +17,7 @@
   $filename = $row['name'];
   $filehash = $row['hash'];
   $filedown = $row['down'];
+
   if(file_exists($dir.$filehash)){
     header("Content-Type: Application/octet-stream");
     header("Content-Disposition: attachment; filename=".$filename); //파일 이름 지정
@@ -36,9 +36,9 @@
       $sql = "UPDATE ftp SET down=(down+1) WHERE id='$num';";
       mysqli_query($conn, $sql);
     }
-    echo "<script>location.href='./index.php';</script>";
     fclose($fp);
     mysqli_close($conn);
+    echo "<script>location.reload();</script>";
   } else{
     echo "<script>alert('파일이 존재하지 않습니다.'); history.back();</script>";
   }
